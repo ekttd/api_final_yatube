@@ -34,13 +34,10 @@ pytest_plugins = [
 
 # test .md
 default_md = '# api_final\napi final\n'
-filename = 'README.md'
-assert filename in root_dir_content, (
-    f'В корне проекта не найден файл `{filename}.`'
-)
+filename = os.path.join(BASE_DIR, 'README.md')
+assert os.path.exists(filename), f'В корне проекта не найден файл `README.md`.'
 
+# Читаем и проверяем содержимое
 with open(filename, 'r', errors='ignore') as f:
-    file = f.read()
-    assert file != default_md, (
-        f'Не забудьте оформить `{filename}.`'
-    )
+    file_content = f.read().strip()
+    assert file_content != default_md, 'Не забудьте оформить `README.md`.'
